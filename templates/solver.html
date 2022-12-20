@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<!-- Make Form for input-->
+<div>
+    <h1 class="gradient-text text-xl"> Solver </h1>
+    <p id="page-text"> Enter 4 numbers to see the solution to make 10! </p>
+</div>
+<!-- Input Block -->
+<div>
+    <form style="text-align: center; margin-top: 30px;">
+        <div>
+            <input type="number" class="quantity" id="N1" name="N1" min="0" max="9" required>
+            <input type="number" class="quantity" id="N2" name="N2" min="0" max="9" required>
+            <input type="number" class="quantity" id="N3" name="N3" min="0" max="9" required>
+            <input type="number" class="quantity" id="N4" name="N4" min="0" max="9" required>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px;" method="POST"> Submit </button>
+        </div>
+    </form>
+</div>
+<!-- Solution Block -->
+<div>
+    <h2 id="h1"></h2> <!-- Solution -->
+    <p id="p1" name="p1" style="display: none;"></p> <!-- Line 1 -->
+    <p id="p2" name="p2" style="display: none;"></p> <!-- Line 2 -->
+    <p id="p3" name="p3" style="display: none;"></p> <!-- Line 3 -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('form').on('submit', function (event) {
+            $.ajax({
+                data: {
+                    N1: $('#N1').val(),
+                    N2: $('#N2').val(),
+                    N3: $('#N3').val(),
+                    N4: $('#N4').val()
+                },
+                type: 'POST',
+                url: '/getsolution'
+            })
+                .done(function (data) {
+                    if (data.NoSolution) {
+                        $('#h1').text(data.NoSolution).show();
+                        $('#p1').hide();
+                        $('#p2').hide();
+                        $('#p3').hide();
+                    } else {
+                        $('#h1').text("Solution Exists!").show();
+                        $('#p1').text(data.para1).show();
+                        $('#p2').text(data.para2).show();
+                        $('#p3').text(data.para3).show();
+                    }
+                })
+            event.preventDefault();
+        });
+    });
+</script>
+
+
+{% endblock %}

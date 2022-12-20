@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div>
+    <h2> Login </h2>
+    <form name="login_form">
+        <div>
+            <input type="text" placeholder="username" required>
+            <input type="password" placeholder="password" required>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px;"> Login </button>
+        </div>
+    </form>
+</div>
+<div>
+    <form name="redirect_register_form">
+        <button type="submit" class="btn btn-dark btn-secondary btn-lg" style="margin-top: 20px;"> Register </button>
+    </form>
+</div>
+
+{% endblock %}
