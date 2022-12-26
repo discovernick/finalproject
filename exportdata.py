@@ -2,6 +2,7 @@
 from itertools import permutations, product
 import operator
 import time
+import sqlite3
 
 # Creating operations combinations
 operands = ["+","-","/","*"]
@@ -89,3 +90,12 @@ solutions = {}
 # Create Dictionary of Solutions
 for i in range(0,10000):
     create_case_both(i)
+
+# Create list version of dictionary
+resultList = list(solutions.items())
+
+#Update SQL Table
+con = sqlite3.connect("solutions.db")
+cur = con.cursor()
+cur.executemany("INSERT INTO solutions (number, solutioncode) VALUES(?, ?)", resultList)
+con.commit() 

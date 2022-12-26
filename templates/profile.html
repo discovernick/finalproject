@@ -1,8 +1,45 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<p> Username </p>
-<p> Stats </p>
-<p> Log Out Button </p>
+<div>
+    <h1 class="gradient-text text-xl"> Your Profile </h1>
+    <div>
+        <h2 class="gradient-text text-lg"> Username </h2>
+        <h2 style="text-align: center;" id="userfill"> {{ username }}</h2>
+        <h2 class="gradient-text text-lg"> Current Score </h2>
+        <h2 style="text-align: center;" id="userfill"> {{ score[0][0] }} </h2>
+    </div>
+    <div> 
+        <h2 class="gradient-text text-lg"> Leaderboard </h2>
+        <table style="text-align: center; margin: auto; width: 400px;" class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col" style="font-weight:bold"> Position </th>
+                <th scope="col" style="font-weight:bold"> Username </th>
+                <th scope="col" style="font-weight:bold"> Current Score </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for winner in leaders %}
+                <tr> 
+                    <th scope="row"> {{ loop.index }} </th>
+                    <td> {{ winner[1] }} </td>
+                    <td> {{ winner[0] }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div style="margin: auto; text-align: center;">
+        <form name="redirect_register_form" action="/logout">
+            <button type="submit" class="btn btn-dark btn-secondary btn-lg" style="margin-top: 20px;" action="/logout"> Logout </button>
+        </form>
+    </div>
+</div>
+
+<script>
+
+</script>
+
 
 {% endblock %}

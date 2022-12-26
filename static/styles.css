@@ -1,86 +1,144 @@
 /* Imported From Boostrap Header Reference */
 .form-control-dark {
-    border-color: var(--bs-gray);
-  }
-  .form-control-dark:focus {
-    border-color: #fff;
-    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
-  }
-  
-  .text-small {
-    font-size: 85%;
-  }
-  
-  .dropdown-toggle {
-    outline: 0;
-  }
+  border-color: var(--bs-gray);
+}
+
+.form-control-dark:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
 
 /* Fancy Text */
 
 .gradient-text {
-    text-align: center;
-    background-color: #f3ec78;
-    background-image: linear-gradient(45deg, #002f2f, #a7a37e);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-    -moz-text-fill-color: transparent;
+  text-align: center;
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, #3778c2, #e12b38);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 #page-text {
-    text-align: center;
-    color: #002f2f;
-    font-size: 16pt;
+  text-align: center;
+  color: #002f2f;
+  font-size: 16pt;
 }
 
 .text-xl {
-    font-size: 5rem;
-    font-weight: bold;
-    line-height: 1.25;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  font-size: 5rem;
+  font-weight: bold;
+  line-height: 1.25;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Styling Main Page */
 body {
-    background-color: #efecca;
-    font-family: 'Raleway';
+  background-color: #efecca;
+  font-family: 'Raleway';
 }
 
 #wrapper-main {
- width:1000px;
- height:600px;
- margin:0 auto;
- background:#efecca;
- position:absolute;
- left:50%;
- top:50%;
- margin-left:-500px;
- margin-top:-200px;
+  width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  background: #efecca;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -500px;
+  margin-top: -200px;
 }
 
 #wrapper-med {
-    width:1000px;
-    height:600px;
-    margin:0 auto;
-    background:#ffffff;
-    position:absolute;
-    text-align: center;
-    left:50%;
-    top:50%;
-    margin-left:-500px;
-    margin-top:0px;
+  width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  margin-left: -500px;
+  margin-top: 0px;
 }
 
 .quantity {
-    width: 75px;
-    height: 75px;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: large;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 10px;
-    border-width: 5px;
+  width: 75px;
+  height: 75px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 5px;
+}
+
+.input_larger {
+  width: 75px;
+  height: 75px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 5px;
+}
+
+.input_smaller {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  border-width: 5px;
+}
+
+.trayog {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+}
+
+.traycalc {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  text-align: center;
+  font-weight: bold;
+}
+
+#button-group {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.labelreg {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
 }

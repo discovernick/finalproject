@@ -16,17 +16,19 @@
             <input type="number" class="quantity" id="N4" name="N4" min="0" max="9" required>
         </div>
         <div>
-            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px;" method="POST"> Submit </button>
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;"
+                method="POST"> Submit </button>
         </div>
     </form>
 </div>
 <!-- Solution Block -->
-<div>
-    <h2 id="h1"></h2> <!-- Solution -->
-    <p id="p1" name="p1" style="display: none;"></p> <!-- Line 1 -->
-    <p id="p2" name="p2" style="display: none;"></p> <!-- Line 2 -->
-    <p id="p3" name="p3" style="display: none;"></p> <!-- Line 3 -->
+<div class="alert alert-primary" role="alert" id="alert1" style="width: 600px ; display: none; border-radius: 25px; margin: auto; text-align: center;">
+    <h2 id="h1" style="text-align:center;"></h2> <!-- Solution -->
+    <p id="p1" name="p1" style="text-align:center;"></p> <!-- Line 1 -->
+    <p id="p2" name="p2" style="text-align:center;"></p> <!-- Line 2 -->
+    <p id="p3" name="p3" style="text-align:center;"></p> <!-- Line 3 -->
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -43,15 +45,17 @@
             })
                 .done(function (data) {
                     if (data.NoSolution) {
-                        $('#h1').text(data.NoSolution).show();
+                        $('#h1').text(data.h1).show();
+                        $('#alert1').show()
                         $('#p1').hide();
                         $('#p2').hide();
                         $('#p3').hide();
                     } else {
-                        $('#h1').text("Solution Exists!").show();
-                        $('#p1').text(data.para1).show();
-                        $('#p2').text(data.para2).show();
-                        $('#p3').text(data.para3).show();
+                        $('#h1').text(data.h1).show();
+                        $('#alert1').show()
+                        $('#p1').text(data.Para1).show();
+                        $('#p2').text(data.Para2).show();
+                        $('#p3').text(data.Para3).show();
                     }
                 })
             event.preventDefault();

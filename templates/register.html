@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<div style="margin: auto; text-align: center;">
+    <h1 class="gradient-text text-xl"> Register </h1>
+    <form name="register_form" id="register_form">
+        <div>
+            <label class="labelreg"> Username: </label>
+            <input type="text" placeholder="username" id="username" name="username" style="margin: 10px;" required>
+            <br>
+            <label class="labelreg"> Password: </label>
+            <input type="password" placeholder="password" id="password" name="password"  style="margin: 10px;" required>
+            <br>
+            <label class="labelreg"> Confirm Password: </label>
+            <input type="password" placeholder="password" id="password_confirmation" name="password_confirmation" style="margin: 10px;"required>
+            <br>
+        </div>
+        <div>
+            <button type="submit" id='registerbtn' class="btn btn-dark btn-secondary btn-lg" style="margin-top: 20px;"
+                method="POST"> Register </button>
+        </div>
+    </form>
+</div>
+<div class="alert alert-danger" role="alert" id="msgalert" name="msgalert" style="display: none;"> </div>
+
+<script>
+    // Get Error Message on Submit
+    $(document).ready(function () {
+        $('#registerbtn').on('click', function (event) {
+            $.ajax({
+                data: {
+                    username: $('#username').val(),
+                    password: $('#password').val(),
+                    password_confirmation: $('#password_confirmation').val()
+                },
+                type: 'POST',
+                url: '/register'
+            })
+                .done(function (data) {
+                    if (data.msg) {
+                        $('#msgalert').text(data.msg).show()
+                    } else {
+                        window.open("/", self)
+                    }
+                })
+            event.preventDefault();
+        });
+    });
+
+
+</script>
+
+{% endblock %}

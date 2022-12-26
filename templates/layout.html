@@ -1,62 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<main>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        
-        <!-- Link Style Sheet -->
-        <link href="/static/styles.css" rel="stylesheet">    
-        
-        <!-- Import Raleway Font -->
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 
-        <!-- Import jQuery for AJAX calls-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <!-- Bootstrap Header Code -->
-        <div class="container">
-            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-                <span class="fs-4" style="font-weight: bold;"> Sydney Train Game</span>
-            </a>
-        
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="/solver" class="nav-link"> Solver </a></li>
-                <li class="nav-item"><a href="/daily" class="nav-link"> Daily Challenge </a></li>
-                <li class="nav-item"><a href="/login" class="nav-link"> Login </a></li>
-                <li class="nav-item"><a href="/profile" class="nav-link"> Profile </a></li>
-            </ul>
-            </header>
+<script>
+  function mult1() {
+    var op, x, y, z;
+
+    x = parseInt(document.getElementById('N1').value);
+    y = parseInt(document.getElementById('N2').value);
+    op1 = document.getElementById('OP1');
+    op = op1.options[op1.selectedIndex].value;
+
+    if (op == '+') {
+      z = x + y;
+      document.getElementById('R1').value = z;
+    } else if (op == '-') {
+      z = x - y;
+      document.getElementById('R1').value = z;
+    } else if (op == '*') {
+      z = x * y;
+      document.getElementById('R1').value = z;
+    } else if (op == '/') {
+      z = x / y;
+      document.getElementById('R1').value = z;
+    }
+  }
+
+  function mult2() {
+    var op, x, y, z;
+
+    x = parseInt(document.getElementById('N3').value);
+    y = parseInt(document.getElementById('N4').value);
+    op2 = document.getElementById('OP2');
+    op = op2.options[op2.selectedIndex].value;
+
+    if (op == '+') {
+      z = x + y;
+      document.getElementById('R2').value = z;
+    } else if (op == '-') {
+      z = x - y;
+      document.getElementById('R2').value = z;
+    } else if (op == '*') {
+      z = x * y;
+      document.getElementById('R2').value = z;
+    } else if (op == '/') {
+      z = x / y;
+      document.getElementById('R2').value = z;
+    }
+  }
+
+  function mult3() {
+    var op, x, y, z;
+
+    x = parseInt(document.getElementById('N5').value);
+    y = parseInt(document.getElementById('N6').value);
+    op3 = document.getElementById('OP3');
+    op = op3.options[op3.selectedIndex].value;
+
+    if (op == '+') {
+      z = x + y;
+      document.getElementById('R3').value = z;
+    } else if (op == '-') {
+      z = x - y;
+      document.getElementById('R3').value = z;
+    } else if (op == '*') {
+      z = x * y;
+      document.getElementById('R3').value = z;
+    } else if (op == '/') {
+      z = x / y;
+      document.getElementById('R3').value = z;
+    }
+  }
+
+</script>
+
+
+<main>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
+
+    <!-- Link Style Sheet -->
+    <link href="/static/styles.css" rel="stylesheet">
+
+    <!-- Import Raleway Font -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+
+    <!-- Import jQuery for AJAX calls-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  </head>
+
+  <body onload="generateTray()">
+    <!-- Bootstrap Header Code -->
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap" />
+          </svg>
+          <span class="fs-4" style="font-weight: bold;"> Sydney Train Game</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/" class="nav-link" aria-current="page" style="font-weight: bold;">Home</a></li>
+          <li class="nav-item"><a href="/solver" class="nav-link" style="font-weight: bold;"> Solver </a></li>
+          <li class="nav-item"><a href="/daily" class="nav-link" style="font-weight: bold;"> Daily Challenge </a></li>
+          <li class="nav-item"><a href="/login" class="nav-link" style="font-weight: bold;"> Login </a></li>
+          <li class="nav-item"><a href="/profile" class="nav-link" id="profilenav" style="font-weight: bold;"> Profile </a></li>
+        </ul>
+      </header>
+    </div>
+
+    <!-- Main Body Code -->
+    {% block main %} {% endblock %}
+
+    <!-- Footer -->
+    <div class="container fixed-bottom">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24">
+              <use xlink:href="#bootstrap"></use>
+            </svg>
+          </a>
+          <span class="mb-3 mb-md-0 text-muted"> Made for Sydneysiders, by Sydneysiders </span>
         </div>
 
-        <!-- Main Body Code -->
-        {% block main %} {% endblock %}
-
-        <!-- Footer -->
-        <div class="container fixed-bottom">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-              <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                  <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-muted"> Made for Sydneysiders, by Sydneysiders </span>
-              </div>
-          
-              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-              </ul>
-            </footer>
-          </div>
-    </body>
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <use xlink:href="#twitter"></use>
+              </svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <use xlink:href="#instagram"></use>
+              </svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                <use xlink:href="#facebook"></use>
+              </svg></a></li>
+        </ul>
+      </footer>
+    </div>
+  </body>
 </main>

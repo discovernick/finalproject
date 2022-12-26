@@ -1,13 +1,376 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<h1> Daily Challenge </h1>
-<div class="quantity" name="challenge_field"> 1234 </div>
 
 
-<p> Button to show / hide brackets </p>
+<!-- Heading Block -->
+<h1 class="gradient-text text-xl"> Daily Challenge </h1>
+
+<!-- Options Block (Tray) -->
+
+<div class="text-center" id="button-group">
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group trayog" role="group" aria-label="First group">
+            <button type="button" class="btn btn-success" id="btn1"></button>
+        </div>
+        <div class="btn-group trayog" role="group" aria-label="Second group">
+            <button type="button" class="btn btn-success" id="btn2"></button>
+        </div>
+        <div class="btn-group trayog" role="group" aria-label="Third group">
+            <button type="button" class="btn btn-success" id="btn3"></button>
+        </div>
+        <div class="btn-group trayog" role="group" aria-label="Fourth group">
+            <button type="button" class="btn btn-success" id="btn4"></button>
+        </div>
+    </div>
+</div>
+
+<!-- Input Block 1 -->
+<div>
+    <form style="text-align: center; margin-top: 30px;" id="form1" name="form1">
+        <div>
+            <select type="number" class="input_larger" id="N1" name="N1" min="0" max="9" required onchange="mult1();">
+                <option> </option>
+                {% for item in tray %}
+                <option> {{item}} </option>
+                {% endfor %}
+            </select>
+            <select class="input_smaller" id="OP1" name="OP1" required onchange="mult1();">
+                <option> </option>
+                <option value="+"> + </option>
+                <option value="-"> - </option>
+                <option value="*"> * </option>
+                <option value="/"> / </option>
+            </select>
+            <select type="number" class="input_larger" id="N2" name="N2" min="0" max="9" required onchange="mult1();">
+                <option> </option>
+                {% for item in tray %}
+                <option> {{item}} </option>
+                {% endfor %}
+            </select>
+            =
+            <input type="number" class="quantity" id="R1" name="R1" disabled="disabled">
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;"
+                method="POST" id="submit1" name="submit1"> Submit </button>
+            <button type="reset" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;"
+                method="POST" id="reset1" name="reset1" disabled="disabled"> Reset </button>
+        </div>
+    </form>
+</div>
+
+<!-- Input Block 2 -->
+<div>
+    <form style="text-align: center; margin-top: 30px;" id="form2" name="form2">
+        <div>
+            <select type="number" class="input_larger" id="N3" name="N3" required onchange="mult2();"
+                disabled="disabled">
+                <option> </option>
+            </select>
+            <select class="input_smaller" id="OP2" name="OP2" required onchange="mult2();" disabled="disabled">
+                <option> </option>
+                <option value="+"> + </option>
+                <option value="-"> - </option>
+                <option value="*"> * </option>
+                <option value="/"> / </option>
+            </select>
+            <select type="number" class="input_larger" id="N4" name="N4" required onchange="mult2();"
+                disabled="disabled">
+                <option> </option>
+            </select>
+            =
+            <input type="number" class="quantity" id="R2" name="R2" disabled="disabled">
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;" method="POST" id="submit2" name="submit2" disabled="disabled"> Submit </button>
+            <button type="reset" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;" method="POST" id="reset2" name="reset2" disabled="disabled"> Reset </button>
+        </div>
+    </form>
+</div>
+
+<!-- Input Block 3 -->
+<div>
+    <form style="text-align: center; margin-top: 30px;" id="form3" name="form3">
+        <div>
+            <select type="number" class="input_larger" id="N5" name="N5" required onchange="mult3();"
+                disabled="disabled">
+                <option> </option>
+            </select>
+            <select class="input_smaller" id="OP3" name="OP3" required onchange="mult3();" disabled="disabled">
+                <option> </option>
+                <option value="+"> + </option>
+                <option value="-"> - </option>
+                <option value="*"> * </option>
+                <option value="/"> / </option>
+            </select>
+            <select type="number" class="input_larger" id="N6" name="N6" required onchange="mult3();"
+                disabled="disabled">
+                <option> </option>
+            </select>
+            =
+            <input type="number" class="quantity" id="R3" name="R3" disabled="disabled">
+            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;" method="POST" disabled="disabled" id="submit3" name="submit3"> Submit </button>
+            <button type="reset" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px;" method="POST" id="reset3" name="reset3" disabled="disabled"> Reset </button>
+        </div>
+    </form>
+</div>
+<!-- Success Block -->
+<div class="alert alert-success" role="alert" id="successalert" name="successalert" style="width: 600px ; display: none; border-radius: 25px; margin: auto; text-align: center;">
+    <h2 id="successheader" style="text-align:center;"> You got it ! Nice ! </h2>
+    <form action="/profile">
+        <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px; margin-bottom: 20px; margin: auto; text-align: center;" method="POST" disabled="disabled" id="profile1" name="profile1"> View Results </button>
+    </form>
+</div>
 
 
+<script>
+    // Get Daily Challenge
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/getdaily'
+        })
+            .done(function (data) {
+                $('#btn1').text(data.N1).show()
+                $('#btn2').text(data.N2).show()
+                $('#btn3').text(data.N3).show()
+                $('#btn4').text(data.N4).show()
+            })
+    });
+    // Submit Function 1
+    $(document).ready(function () {
+        $('#form1').on('submit', function (event) {
+            $.ajax({
+                data: {
+                    N1: $('#N1').val(),
+                    N2: $('#N2').val(),
+                    R1: $('#R1').val()
+                },
+                type: 'POST',
+                url: '/traysubmit1'
+            })
+                .done(function (data) {
+                    // Change Options on the Dropdowns 1
+                    var option1 = $('<option></option>').text(" ")
+                    var option2 = $('<option></option>').text(data.N1)
+                    var option3 = $('<option></option>').text(data.N2)
+                    var option4 = $('<option></option>').text(data.N3)
+                    var option5 = $('<option></option>').text(" ")
+                    var option6 = $('<option></option>').text(data.N1)
+                    var option7 = $('<option></option>').text(data.N2)
+                    var option8 = $('<option></option>').text(data.N3)
+                    // Change Options on the Dropdowns 1
+                    $("#N4").empty()
+                    $("#N4").append(option1)
+                    $("#N4").append(option2)
+                    $("#N4").append(option3)
+                    $("#N4").append(option4)
+                    // Change Options on the Dropdowns 1
+                    $("#N3").empty()
+                    $("#N3").append(option5)
+                    $("#N3").append(option6)
+                    $("#N3").append(option7)
+                    $("#N3").append(option8)
+                    // Hide/Show appropriate buttons
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).show()
+                    $('#btn3').text(data.N3).show()
+                    $('#btn4').text(data.N4).hide()
+                    // Disable/Enable Fields
+                    $('#N1').prop("disabled", true)
+                    $('#N2').prop("disabled", true)
+                    $('#OP1').prop("disabled", true)
+                    $('#OP2').prop("disabled", false)
+                    $('#N3').prop("disabled", false)
+                    $('#N4').prop("disabled", false)
+                    $('#submit1').prop("disabled", true)
+                    $('#reset1').prop("disabled", false)
+                    $('#submit2').prop("disabled", false)
+                })
+            event.preventDefault();
+        });
+    });
+    // Submit Function 2
+    $(document).ready(function () {
+        $('#form2').on('submit', function (event) {
+            $.ajax({
+                data: {
+                    N3: $('#N3').val(),
+                    N4: $('#N4').val(),
+                    R2: $('#R2').val()
+                },
+                type: 'POST',
+                url: '/traysubmit2'
+            })
+                .done(function (data) {
+                    // Change Options on the Dropdowns 1
+                    var option1 = $('<option></option>').text(" ")
+                    var option2 = $('<option></option>').text(data.N1)
+                    var option3 = $('<option></option>').text(data.N2)
+                    var option4 = $('<option></option>').text(" ")
+                    var option5 = $('<option></option>').text(data.N1)
+                    var option6 = $('<option></option>').text(data.N2)
+                    // Change Options on the Dropdowns 1
+                    $("#N5").empty()
+                    $("#N5").append(option1)
+                    $("#N5").append(option2)
+                    $("#N5").append(option3)
+                    // Change Options on the Dropdowns 1
+                    $("#N6").empty()
+                    $("#N6").append(option4)
+                    $("#N6").append(option5)
+                    $("#N6").append(option6)
+                    // Hide/Show appropriate buttons
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).show()
+                    $('#btn3').text(data.N3).hide()
+                    $('#btn4').text(data.N4).hide()
+                    // Disable/Enable Fields
+                    $('#N3').prop("disabled", true)
+                    $('#N4').prop("disabled", true)
+                    $('#OP2').prop("disabled", true)
+                    $('#OP3').prop("disabled", false)
+                    $('#N5').prop("disabled", false)
+                    $('#N6').prop("disabled", false)
+                    $('#submit2').prop("disabled", true)
+                    $('#reset2').prop("disabled", false)
+                    $('#reset1').prop("disabled", true)
+                    $('#submit3').prop("disabled", false)
+                })
+            event.preventDefault();
+        });
+    });
+    // Submit Function 3
+    $(document).ready(function () {
+        $('#form3').on('submit', function (event) {
+            $.ajax({
+                data: {
+                    N5: $('#N5').val(),
+                    N6: $('#N6').val(),
+                    R3: $('#R3').val()
+                },
+                type: 'POST',
+                url: '/traysubmit3'
+            })
+                .done(function (data) {
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).hide()
+                    $('#btn3').text(data.N3).hide()
+                    $('#btn4').text(data.N4).hide()
+                    $('#reset3').prop("disabled", false)
+                    $('#reset2').prop("disabled", true)
+                    $('#submit3').prop("disabled", true)
+                    $('#OP3').prop("disabled", true)
+                    $('#N5').prop("disabled", true)
+                    $('#N6').prop("disabled", true)
+                    if (data.N1 == "10" || data.N1 == 10) {
+                        $('#successalert').show()
+                        $('#submit3').prop("disabled", true)
+                        $('#OP3').prop("disabled", true)
+                        $('#N5').prop("disabled", true)
+                        $('#N6').prop("disabled", true)
+                        $('#reset3').prop("disabled", true)
+                        $('#profile1').prop("disabled", false)
+                    }
+                })
+            event.preventDefault();
+        });
+    });
+    // Revert Function 1
+    $(document).ready(function () {
+        $('#reset1').on('click', function (event) {
+            $.ajax({
+                data: {
+                    N1: $('#N1').val(),
+                    N2: $('#N2').val(),
+                    R1: $('#R1').val()
+                },
+                type: 'POST',
+                url: '/trayrevert1'
+            })
+                .done(function (data) {
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).show()
+                    $('#btn3').text(data.N3).show()
+                    $('#btn4').text(data.N4).show()
+                    $('#N1').prop("disabled", false)
+                    $('#N2').prop("disabled", false)
+                    $('#OP1').prop("disabled", false)
+                    $('#N3').prop("disabled", true)
+                    $('#N4').prop("disabled", true)
+                    $('#OP2').prop("disabled", true)
+                    $('#N3').text("").show()
+                    $('#N4').text("").show()
+                    $('#OP2').text("").show()
+                    $('#R2').val("")
+                    $('#submit2').prop("disabled", true)
+                    $('#submit1').prop("disabled", false)
+                })
+            event.preventDefault();
+        });
+    });
 
+    // Revert Function 2
+    $(document).ready(function () {
+        $('#reset2').on('click', function (event) {
+            $.ajax({
+                data: {
+                    N3: $('#N3').val(),
+                    N4: $('#N4').val(),
+                    R2: $('#R2').val()
+                },
+                type: 'POST',
+                url: '/trayrevert2'
+            })
+                .done(function (data) {
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).show()
+                    $('#btn3').text(data.N3).show()
+                    $('#btn4').hide()
+                    $('#N3').prop("disabled", false)
+                    $('#N4').prop("disabled", false)
+                    $('#OP2').prop("disabled", false)
+                    $('#N5').prop("disabled", true)
+                    $('#N6').prop("disabled", true)
+                    $('#OP3').prop("disabled", true)
+                    $('#submit3').prop("disabled", true)
+                    $('#submit2').prop("disabled", false)
+                    $('#reset1').prop("disabled", false)
+                    $('#reset2').prop("disabled", true)
+                    $('#N5').text("").show()
+                    $('#N6').text("").show()
+                    $('#OP3').text("").show()
+                    $('#R3').val("")
+                })
+            event.preventDefault();
+        });
+    });
+
+    // Revert Function 3
+    $(document).ready(function () {
+        $('#reset3').on('click', function (event) {
+            $.ajax({
+                data: {
+                    N5: $('#N5').val(),
+                    N6: $('#N6').val(),
+                    R3: $('#R3').val()
+                },
+                type: 'POST',
+                url: '/trayrevert3'
+            })
+                .done(function (data) {
+                    $('#btn1').text(data.N1).show()
+                    $('#btn2').text(data.N2).show()
+                    $('#btn3').hide()
+                    $('#btn4').hide()
+                    $('#N5').prop("disabled", false)
+                    $('#N6').prop("disabled", false)
+                    $('#OP3').prop("disabled", false)
+                    $('#reset2').prop("disabled", false)
+                    $('#submit3').prop("disabled", false)
+                })
+            event.preventDefault();
+        });
+    });
+
+
+</script>
 
 {% endblock %}

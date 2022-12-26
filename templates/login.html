@@ -2,22 +2,55 @@
 
 {% block main %}
 
-<div>
-    <h2> Login </h2>
+<div style="margin: auto; text-align: center;">
+    <h1 class="gradient-text text-xl"> Login </h1>
     <form name="login_form">
         <div>
-            <input type="text" placeholder="username" required>
-            <input type="password" placeholder="password" required>
+            <label style="margin: 20px; font-weight: bold;"> Username: </label>
+            <input type="text" placeholder="username" id="username" name="username" required>
+            <br>
+            <label style="margin: 20px; font-weight: bold;"> Password: </label>
+            <input type="password" placeholder="password" id="password" name="password" required>
+            <br>
         </div>
         <div>
-            <button type="submit" class="btn btn-dark btn-lg" style="margin-top: 20px;"> Login </button>
+            <button type="submit" id="login8" class="btn btn-dark btn-lg" style="margin-top: 20px; width: 150px;" method="POST"> Login </button>
         </div>
     </form>
 </div>
-<div>
-    <form name="redirect_register_form">
-        <button type="submit" class="btn btn-dark btn-secondary btn-lg" style="margin-top: 20px;"> Register </button>
+<div style="margin: auto; text-align: center; margin-top: 20px;">
+    <form name="redirect_register_form" action="/register">
+        <label style="font-weight: bold;"> New to STG ? </label>
+        <br>
+        <button type="submit" class="btn btn-dark btn-secondary btn-lg" style="margin-top: 10px; width: 150px;" method="GET"> Register
+        </button>
     </form>
 </div>
+<div class="alert alert-danger" role="alert" id="msg_alert" name="msgalert" style="display: none;"> </div>
+
+<script> 
+    // Get Error Message on Submit
+    $(document).ready(function () {
+        $('#login8').on('click', function (event) {
+            $.ajax({
+                data: {
+                    username: $('#username').val(),
+                    password: $('#password').val(),
+                },
+                type: 'POST',
+                url: '/login'
+            })
+                .done(function (data) {
+                    if (data.msg) {
+                        $('#msg_alert').text(data.msg).show()
+                    } else {
+                        window.open("/", "_self")
+                    }
+                })
+            event.preventDefault();
+        });
+    });
+
+</script>
 
 {% endblock %}
