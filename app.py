@@ -262,7 +262,7 @@ def profile():
 
 
 # Solver
-@app.route("/solver", methods=["GET", "POST"])
+@app.route("/solver", methods=["GET", "POST"]) 
 def solver():
     return render_template("solver.html")
 

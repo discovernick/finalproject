@@ -21,7 +21,7 @@ cur.execute("SELECT number FROM solutions WHERE NOT solutioncode='NoSolution'")
 combinations = cur.fetchall()
 
 # Shufffle three times
-random.shuffle(combinations)
+random.shuffle(combinations) 
 random.shuffle(combinations)
 random.shuffle(combinations)
 

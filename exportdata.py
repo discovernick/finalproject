@@ -19,7 +19,7 @@ def bubblesort4(arr):
         for y in range(x,2):
             if (arr[y] > arr[y+1]):
                 temp = arr[y]
-                arr[y] = arr[y+1]
+                arr[y] = arr[y+1] 
                 arr[y+1] = temp
     return arr
 
